@@ -19,8 +19,38 @@ int main(int argc, char *argv[])
 
 }
 
+int process_arg(char* arg)
+{
+  if(arg[0]=='-')
+  {
+    printf("Argument %s is a flag\n", arg);
+    switch(arg[1])
+    {
+      case 'a'  :
+      case 'b'  :
+      case 'c'  :
+        return arg;
+      case 't'  :
+        printf("Case T Happened\n");
+      default   :
+        return 0;
+    }
+
+  }
+  else
+  {
+    printf("Argument %s is not a flag\n", arg);
+  }
+}
+
 int read_arguments(int argc, char *argv[])
 {
+  int idx = 1;
+  while(idx < argc)
+  {
+    process_arg(argv[idx]);
+    idx++;
+  }
   return 0;
 }
 
