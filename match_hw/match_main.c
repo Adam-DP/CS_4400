@@ -3,58 +3,70 @@
 *
 */
 
-int read_arguments(int argc, char *argv[]); // The idea is that if it's not valid input it prints something out and exits the program
+#include <stdio.h>
+
+
+char * read_arguments(int argc, char *argv[]); // The idea is that if it's not valid input it prints something out and exits the program
 void interpret_flag(int modifier); // This should read in a flag and adjust the settings
-void check_match();
+void process_data();
+
+
+char mode_flag; /* This determines the mode. It will be set in the read_arguments method*/
+char * data;
+char t_true; /*If this is set to 't' then it will say that the t mode is on. Otherwise default it to 0*/
 
 int main(int argc, char *argv[])
 {
-  /* Read in arguments to prepare for processing */
-  int modifier = read_arguments(argc, argv);
+  mode_flag = 'a';
+  t_true = 0;
 
-  /* Adjust the settings based on the flags */
-  interpret_flag(modifier);
+  /* Read in arguments to prepare for processing */
+  read_arguments(argc, argv);
 
   /* Process the string as specified by the user */
-
+  process_data();
 }
 
-int process_arg(char* arg)
+void process_flag(char* arg)
 {
-  if(arg[0]=='-')
+  printf("Argument %s is a flag\n", arg);
+  switch(arg[1])
   {
-    printf("Argument %s is a flag\n", arg);
-    switch(arg[1])
-    {
-      case 'a'  :
-      case 'b'  :
-      case 'c'  :
-        return arg;
-      case 't'  :
-        printf("Case T Happened\n");
-      default   :
-        return 0;
-    }
-
-  }
-  else
-  {
-    printf("Argument %s is not a flag\n", arg);
+    case 'a'  :
+    case 'b'  :
+    case 'c'  :
+      mode_flag = arg[1];
+      break;
+    case 't'  :
+      printf("Case T Happened\n");
+      t_true = 't';
+      break;
+    default   :
+      printf("That's not valid...");
+      break;
   }
 }
 
-int read_arguments(int argc, char *argv[])
+char * read_arguments(int argc, char *argv[])
 {
+  char * output;
   int idx = 1;
-  while(idx < argc)
+  while(idx <= argc)
   {
-    process_arg(argv[idx]);
+    if(argv[idx][0]=='-')
+    {
+      process_flag(argv[idx]);
+    }
+    else
+    {
+      data = argv[idx];
+    }
     idx++;
   }
   return 0;
 }
 
-void interpret_flag(int modifier)
+void process_data()
 {
-  printf("The modifier is %d\n", modifier);
+
 }
