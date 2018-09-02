@@ -21,6 +21,7 @@ int main(int argc, char *argv[])
 {
   mode_flag = 'a';
   t_true = 0;
+  //data char * [10];
 
   /* Read in arguments to prepare for processing */
   read_arguments(argc, argv);
@@ -85,9 +86,45 @@ void read_arguments(int argc, char *argv[])
   }
 }
 
+/*
+Description of pattern:
+1. Any number (including zero) b's
+2. Exactly two :'s \
+3. 1 or more o's
+4. Exactly one :
+5. an odd number of uppercase letters
+*/
 void process_data_a()
 {
   printf("process data a\n");
+  char * arrow = data;
+
+  // First check if it starts with b's
+  while(*arrow == 'b') arrow++;
+  // Then check to see if it has two :'s immediately
+  if(* arrow==':') arrow++;
+  else  {printf("no 1, %c", arrow); return;}
+  if(* arrow==':') arrow++;
+  else  {printf("no 2"); return;}
+  // Check that it has at least 1 o
+  if(* arrow=='o') arrow++;
+  else  {printf("no 3"); return;}
+  while(* arrow=='o') arrow++;
+  // Check for Exactly one :
+  if(* arrow==':') arrow++;
+  else  {printf("no 4"); return;}
+  // Check for an odd number of uppercase letters
+  int count = 0;
+  while(* arrow >= 'A' && * arrow <='Z'){count++; arrow++;}
+  // make sure it's odd
+  if((count & 1)&& * arrow == 0) printf("yes");
+  else  {printf("no 5"); return;}
+
+  // For matches, move the first character to the end
+  if(t_true)
+  {
+
+  }
 }
 
 void process_data_b()
