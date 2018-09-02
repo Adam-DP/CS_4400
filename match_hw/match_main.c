@@ -249,15 +249,19 @@ void process_data_c()
   else  {printf("no 4"); return;}
 
   // Check if X then repeats twice
-  for(int i = 0; i < num_X; i++)
+  int idx = 0;
+  while(idx < num_X)
   {
-    if(* arrow==x_seq[i]) arrow++;
+    if(* arrow==x_seq[idx]) arrow++;
     else  {printf("no 5"); return;}
+    idx++;
   }
-  for(int i = 0; i < num_X; i++)
+  idx = 0;
+  while(idx < num_X)
   {
-    if(* arrow==x_seq[i]) arrow++;
+    if(* arrow==x_seq[idx]) arrow++;
     else  {printf("no 5"); return;}
+    idx++;
   }
 
   // Check for an odd number of uppercase letters
