@@ -6,9 +6,11 @@
 #include <stdio.h>
 
 
-char * read_arguments(int argc, char *argv[]); // The idea is that if it's not valid input it prints something out and exits the program
+void read_arguments(int argc, char *argv[]); // The idea is that if it's not valid input it prints something out and exits the program
 void interpret_flag(int modifier); // This should read in a flag and adjust the settings
-void process_data();
+void process_data_a();
+void process_data_b();
+void process_data_c();
 
 
 char mode_flag; /* This determines the mode. It will be set in the read_arguments method*/
@@ -24,7 +26,25 @@ int main(int argc, char *argv[])
   read_arguments(argc, argv);
 
   /* Process the string as specified by the user */
-  process_data();
+
+  switch(mode_flag)
+  {
+    case 'a':
+      process_data_a();
+      break;
+    case 'b':
+      process_data_b();
+      break;
+    case 'c':
+      process_data_c();
+      break;
+    default:
+      printf("Invalid processing mode_flag");
+
+  }
+
+  printf("Data: %s \n", data);
+
 }
 
 void process_flag(char* arg)
@@ -47,11 +67,11 @@ void process_flag(char* arg)
   }
 }
 
-char * read_arguments(int argc, char *argv[])
+void read_arguments(int argc, char *argv[])
 {
   char * output;
   int idx = 1;
-  while(idx <= argc)
+  while(idx < argc)
   {
     if(argv[idx][0]=='-')
     {
@@ -63,10 +83,21 @@ char * read_arguments(int argc, char *argv[])
     }
     idx++;
   }
-  return 0;
 }
 
-void process_data()
+void process_data_a()
 {
+  printf("process data a\n");
+}
+
+void process_data_b()
+{
+  printf("process data b\n");
+
+}
+
+void process_data_c()
+{
+  printf("process data c\n");
 
 }
