@@ -44,7 +44,7 @@ int main(int argc, char *argv[])
 
   }
 
-  printf("Data: %s \n", data);
+  //printf("Data: %s \n", data);
 
 }
 
@@ -86,6 +86,8 @@ void read_arguments(int argc, char *argv[])
   }
 }
 
+
+
 /*
 Description of pattern:
 1. Any number (including zero) b's
@@ -117,19 +119,56 @@ void process_data_a()
   int count = 0;
   while(* arrow >= 'A' && * arrow <='Z'){count++; arrow++;}
   // make sure it's odd
-  if((count & 1)&& * arrow == 0) printf("yes");
+  if((count & 1)&& * arrow == 0) printf("yes\n");
   else  {printf("no 5"); return;}
 
   // For matches, move the first character to the end
+
   if(t_true)
   {
+
 
   }
 }
 
+
+/*
+B CONSTRAINTS
+1. any number (including zero) repetitions of the letter “g”;
+2 exactly two “=”s;
+3. between 1 and 3 (inclusive) decimal digits — call this sequence X;
+4. 2 or more repetitions of the letter “z”;
+5. exactly one “=”;
+6. the same characters as the odd-positioned characters in X; and
+7. an odd number of uppercase letters.
+*/
+
 void process_data_b()
 {
   printf("process data b\n");
+
+  char * arrow = data;
+
+  // First check if it starts with b's
+  while(*arrow == 'g') arrow++;
+  // Then check to see if it has two :'s immediately
+  if(* arrow==':') arrow++;
+  else  {printf("no 1, %c", arrow); return;}
+  if(* arrow==':') arrow++;
+  else  {printf("no 2"); return;}
+  // Check that it has at least 1 o
+  if(* arrow=='o') arrow++;
+  else  {printf("no 3"); return;}
+  while(* arrow=='o') arrow++;
+  // Check for Exactly one :
+  if(* arrow==':') arrow++;
+  else  {printf("no 4"); return;}
+  // Check for an odd number of uppercase letters
+  int count = 0;
+  while(* arrow >= 'A' && * arrow <='Z'){count++; arrow++;}
+  // make sure it's odd
+  if((count & 1)&& * arrow == 0) printf("yes\n");
+  else  {printf("no 5"); return;}
 
 }
 
