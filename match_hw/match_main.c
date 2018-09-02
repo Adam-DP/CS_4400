@@ -196,8 +196,75 @@ void process_data_b()
 
 }
 
+/*
+1. any odd number of repetitions of the letter “g”;
+2. exactly one “:”;
+3. between 1 and 3 (inclusive) decimal digits — call this sequence X;
+4. any odd number of repetitions of the letter “u”;
+5. exactly one “:”;
+6. the same characters as X repeated 2 times; and
+7. an odd number of uppercase letters.
+*/
 void process_data_c()
 {
   printf("process data c\n");
+
+  char * arrow = data;
+
+  // 1. any odd number of repetitions of the letter “g”;
+  int count_g = 0;
+  while(* arrow == 'g'){count_g++; arrow++;}
+  // make sure it's odd
+  if(count_g & 1) ;
+  else  {printf("no 1"); return;}
+
+
+  // exactly one “:”;
+  if(* arrow==':') arrow++;
+  else  {printf("no 2"); return;}
+
+  // check that it has between 1 and 3 digits -> also save X for later
+  int num_X = 0;
+  char x_seq[3];
+  while(* arrow >= '0' && * arrow <='9')
+  {
+    if(num_X > 3) {printf("no 3"); return;}
+
+    x_seq[num_X] = *arrow;
+    num_X++;
+    arrow++;
+  }
+  if(num_X>=1 && num_X<=3) ;
+  else  {printf("no 3"); return;}
+
+  // any odd number of u
+  int count_u = 0;
+  while(* arrow == 'u'){count_u++; arrow++;}
+  // make sure it's odd
+  if(count_u & 1) ;
+  else  {printf("no 1"); return;}
+
+  // Check for Exactly one :
+  if(* arrow==':') arrow++;
+  else  {printf("no 4"); return;}
+
+  // Check if X then repeats twice
+  for(int i = 0; i < num_X; i++)
+  {
+    if(* arrow==x_seq[i]) arrow++;
+    else  {printf("no 5"); return;}
+  }
+  for(int i = 0; i < num_X; i++)
+  {
+    if(* arrow==x_seq[i]) arrow++;
+    else  {printf("no 5"); return;}
+  }
+
+  // Check for an odd number of uppercase letters
+  int count = 0;
+  while(* arrow >= 'A' && * arrow <='Z'){count++; arrow++;}
+  // make sure it's odd
+  if((count & 1)&& * arrow == 0) printf("yes\n");
+  else  {printf("no 6"); return;}
 
 }
