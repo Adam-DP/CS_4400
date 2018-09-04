@@ -11,6 +11,7 @@ void interpret_flag(int modifier); // This should read in a flag and adjust the 
 void process_data_a();
 void process_data_b();
 void process_data_c();
+void process_data();
 
 
 char mode_flag; /* This determines the mode. It will be set in the read_arguments method*/
@@ -28,6 +29,12 @@ int main(int argc, char *argv[])
 
   /* Process the string as specified by the user */
 
+  process_data();
+
+}
+
+void process_data()
+{
   switch(mode_flag)
   {
     case 'a':
@@ -43,9 +50,6 @@ int main(int argc, char *argv[])
       printf("Invalid processing mode_flag");
 
   }
-
-  //printf("Data: %s \n", data);
-
 }
 
 void process_flag(char* arg)
@@ -81,6 +85,7 @@ void read_arguments(int argc, char *argv[])
     else
     {
       data = argv[idx];
+      process_data;
     }
     idx++;
   }
