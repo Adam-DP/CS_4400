@@ -50,7 +50,7 @@ int main(int argc, char *argv[])
 
 void process_flag(char* arg)
 {
-  printf("Argument %s is a flag\n", arg);
+  // printf("Argument %s is a flag\n", arg);
   switch(arg[1])
   {
     case 'a'  :
@@ -59,11 +59,11 @@ void process_flag(char* arg)
       mode_flag = arg[1];
       break;
     case 't'  :
-      printf("Case T Happened\n");
+      // printf("Case T Happened\n");
       t_true = 't';
       break;
     default   :
-      printf("That's not valid...");
+      // printf("That's not valid...");
       break;
   }
 }
@@ -98,29 +98,29 @@ Description of pattern:
 */
 void process_data_a()
 {
-  printf("process data a\n");
+//  printf("process data a\n");
   char * arrow = data;
 
   // First check if it starts with b's
   while(*arrow == 'b') arrow++;
   // Then check to see if it has two :'s immediately
   if(* arrow==':') arrow++;
-  else  {printf("no 1, %c", arrow); return;}
+  else  {return;}
   if(* arrow==':') arrow++;
-  else  {printf("no 2"); return;}
+  else  {return;}
   // Check that it has at least 1 o
   if(* arrow=='o') arrow++;
-  else  {printf("no 3"); return;}
+  else  {return;}
   while(* arrow=='o') arrow++;
   // Check for Exactly one :
   if(* arrow==':') arrow++;
-  else  {printf("no 4"); return;}
+  else  {return;}
   // Check for an odd number of uppercase letters
   int count = 0;
   while(* arrow >= 'A' && * arrow <='Z'){count++; arrow++;}
   // make sure it's odd
   if((count & 1)&& * arrow == 0) printf("yes\n");
-  else  {printf("no 5"); return;}
+  else  {return;}
 
   // For matches, move the first character to the end
 
@@ -145,7 +145,7 @@ B CONSTRAINTS
 
 void process_data_b()
 {
-  printf("process data b\n");
+//  printf("process data b\n");
 
   char * arrow = data;
 
@@ -153,9 +153,10 @@ void process_data_b()
   while(*arrow == 'g') arrow++;
   // Then check to see if it has two ='s immediately
   if(* arrow=='=') arrow++;
-  else  {printf("no 1, %c", arrow); return;}
+  else  {// printf("no 1, %c", arrow);
+  return;}
   if(* arrow=='=') arrow++;
-  else  {printf("no 2"); return;}
+  else  {return;}
 
   // check that it has between 1 and 3 digits
   int num_X = 0;
@@ -167,24 +168,24 @@ void process_data_b()
     arrow++;
   }
   if(num_X>=1 && num_X<=3) ;
-  else  {printf("no 3"); return;}
+  else  {return;}
 
   // Check for two or more z's
   if(* arrow=='z') arrow++;
-  else  {printf("no 3"); return;}
+  else  {return;}
   if(* arrow=='z') arrow++;
-  else  {printf("no 3"); return;}
+  else  {return;}
   while(* arrow=='z') arrow++;
 
   // Check for Exactly one =
   if(* arrow=='=') arrow++;
-  else  {printf("no 4"); return;}
+  else  {return;}
 
   // 6. the same characters as the odd-positioned characters in X;
   if(odd_char)
   {
     if(* arrow==odd_char) arrow++;
-    else  {printf("no 5"); return;}
+    else  {return;}
   }
 
   // Check for an odd number of uppercase letters
@@ -192,7 +193,7 @@ void process_data_b()
   while(* arrow >= 'A' && * arrow <='Z'){count++; arrow++;}
   // make sure it's odd
   if((count & 1)&& * arrow == 0) printf("yes\n");
-  else  {printf("no 6"); return;}
+  else  {return;}
 
 }
 
@@ -207,7 +208,7 @@ void process_data_b()
 */
 void process_data_c()
 {
-  printf("process data c\n");
+  // printf("process data c\n");
 
   char * arrow = data;
 
@@ -216,51 +217,51 @@ void process_data_c()
   while(* arrow == 'g'){count_g++; arrow++;}
   // make sure it's odd
   if(count_g & 1) ;
-  else  {printf("no 1"); return;}
+  else  {return;}
 
 
   // exactly one “:”;
   if(* arrow==':') arrow++;
-  else  {printf("no 2"); return;}
+  else  {return;}
 
   // check that it has between 1 and 3 digits -> also save X for later
   int num_X = 0;
   char x_seq[3];
   while(* arrow >= '0' && * arrow <='9')
   {
-    if(num_X > 3) {printf("no 3"); return;}
+    if(num_X > 3) {return;}
 
     x_seq[num_X] = *arrow;
     num_X++;
     arrow++;
   }
   if(num_X>=1 && num_X<=3) ;
-  else  {printf("no 3"); return;}
+  else  {return;}
 
   // any odd number of u
   int count_u = 0;
   while(* arrow == 'u'){count_u++; arrow++;}
   // make sure it's odd
   if(count_u & 1) ;
-  else  {printf("no 1"); return;}
+  else  {return;}
 
   // Check for Exactly one :
   if(* arrow==':') arrow++;
-  else  {printf("no 4"); return;}
+  else  {return;}
 
   // Check if X then repeats twice
   int idx = 0;
   while(idx < num_X)
   {
     if(* arrow==x_seq[idx]) arrow++;
-    else  {printf("no 5"); return;}
+    else  {return;}
     idx++;
   }
   idx = 0;
   while(idx < num_X)
   {
     if(* arrow==x_seq[idx]) arrow++;
-    else  {printf("no 5"); return;}
+    else  {return;}
     idx++;
   }
 
@@ -269,6 +270,6 @@ void process_data_c()
   while(* arrow >= 'A' && * arrow <='Z'){count++; arrow++;}
   // make sure it's odd
   if((count & 1)&& * arrow == 0) printf("yes\n");
-  else  {printf("no 6"); return;}
+  else  {return;}
 
 }
