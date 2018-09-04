@@ -109,6 +109,20 @@ void process_data_a()
 {
 //  printf("process data a\n");
   char * arrow = data;
+  // printf("Data size: %d", strlen(data));
+
+  /*  prep output if needed */ 
+  char output[strlen(data)*2];
+
+  int index = 0;
+  while(index < strlen(data)-1)
+  {
+    output[index] = data[index+1];
+    index++;
+  }
+
+  output[strlen(data)-1] = data[0];
+  output[strlen(data)] = 0;
 
   // First check if it starts with b's
   while(*arrow == 'b') arrow++;
@@ -128,7 +142,7 @@ void process_data_a()
   int count = 0;
   while(* arrow >= 'A' && * arrow <='Z'){count++; arrow++;}
   // make sure it's odd
-  if((count & 1)&& * arrow == 0) case_yes("test");
+  if((count & 1)&& * arrow == 0) case_yes(output);
   else  {case_no(); return;}
 
   // For matches, move the first character to the end
