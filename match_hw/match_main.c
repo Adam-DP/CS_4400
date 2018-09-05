@@ -111,7 +111,7 @@ void process_data_a()
   char * arrow = data;
   // printf("Data size: %d", strlen(data));
 
-  /*  prep output if needed */ 
+  /*  prep output if needed */
   char output[strlen(data)*2];
 
   int index = 0;
