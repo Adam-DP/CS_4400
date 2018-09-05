@@ -110,6 +110,21 @@ void process_data_a()
 //  printf("process data a\n");
   char * arrow = data;
 
+  /*  prep output if needed */
+  char output[strlen(data)*2];
+
+  int index = 0;
+  while(index < strlen(data))
+  {
+    output[index] = data[index+1];
+    index++;
+  }
+
+  output[strlen(data)-1] = data[0];
+  output[strlen(data)] = 0;
+
+
+
   // First check if it starts with b's
   while(*arrow == 'b') arrow++;
   // Then check to see if it has two :'s immediately
@@ -166,9 +181,9 @@ void process_data_b()
   {
     output[index*2] = data[index];
     output[index*2+1] = (index%8)-48;
+    index++;
   }
 
-  output[strlen(data)-1] = data[0];
   output[strlen(data)] = 0;
 
 
