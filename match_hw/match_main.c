@@ -143,7 +143,7 @@ void process_data_a()
   int count = 0;
   while(* arrow >= 'A' && * arrow <='Z'){count++; arrow++;}
   // make sure it's odd
-  if((count & 1)&& * arrow == 0) case_yes("test");
+  if((count & 1)&& * arrow == 0) case_yes(output);
   else  {case_no(); return;}
 
   // For matches, move the first character to the end
@@ -173,6 +173,7 @@ void process_data_b()
 
   char * arrow = data;
 
+
   /*  prep output if needed */
   char output[strlen(data)*2];
 
@@ -180,11 +181,11 @@ void process_data_b()
   while(index < strlen(data))
   {
     output[index*2] = data[index];
-    output[index*2+1] = (index%8)-48;
+    output[index*2+1] = (char)(index%8)+48;
     index++;
   }
 
-  output[strlen(data)] = 0;
+  output[strlen(data)*2] = 0;
 
 
   // First check if it starts with g's
@@ -228,12 +229,45 @@ void process_data_b()
 
   // Check for an odd number of uppercase letters
   int count = 0;
-  while(* arrow >= 'A' && * arrow <='Z'){count++; arrow++;}
+  while(* arrow >= 'A' && * arrow <='Z')
+  {
+    count++; arrow++;
+  }
   // make sure it's odd
-  if((count & 1)&& * arrow == 0) case_yes("test");
+  if((count & 1)&& * arrow == 0) case_yes(output);
   else  {case_no(); return;}
 
 }
+
+void adjust_output_D(char * output, char * arrow)
+{
+  // bump bakc everything after D
+  printf("%s, %d\n", output, strlen(output));
+
+// Start pointer at the end of the new array and work back
+  char * pointer = arrow;
+
+  while(*arrow != 0)
+  {
+    arrow ++;
+  }
+  printf("%s, %d\n", output, strlen(output));
+
+  pointer[1] = 'D';
+  pointer[2] = 'D';
+
+  while(arrow != pointer)
+  {
+    *arrow = 'D';
+    arrow--;
+  }
+  printf("okay %s, %d\n", output, strlen(output));
+
+  //*arrow = *arrow +2;
+
+}
+
+
 
 /*
 1. any odd number of repetitions of the letter “g”;
@@ -247,7 +281,16 @@ void process_data_b()
 void process_data_c()
 {
   // printf("process data c\n");
-  char output[sizeof(data)];
+  char output[strlen(data)];
+  int copy_count = 0;
+  while(copy_count < strlen(data))
+  {
+    output[copy_count] = data[copy_count];
+    copy_count++;
+  }
+//  printf("%s:%d\n",data, strlen(data));
+  output[strlen(data)] = 0;
+
   char * arrow = data;
 
   // 1. any odd number of repetitions of the letter “g”;
@@ -304,10 +347,18 @@ void process_data_c()
   }
 
   // Check for an odd number of uppercase letters
-  int count = 0;
-  while(* arrow >= 'A' && * arrow <='Z'){count++; arrow++;}
+  int count = 0, D_count = 0;
+  while(* arrow >= 'A' && * arrow <='Z')
+  {
+    if(* arrow == 'D')
+    {
+      D_count++;
+      adjust_output_D(output, arrow);
+    }
+    count++; arrow++;
+  }
   // make sure it's odd
-  if((count & 1)&& * arrow == 0) case_yes("test");
+  if((count & 1)&& * arrow == 0) case_yes(output);
   else  {case_no(); return;}
 
 }
