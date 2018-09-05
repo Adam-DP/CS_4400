@@ -282,15 +282,26 @@ void adjust_output_D(char * output, char * arrow)
 void process_data_c()
 {
   // printf("process data c\n");
-  char output[strlen(data)];
-  int copy_count = 0;
-  while(copy_count < strlen(data))
+  char output[strlen(data)*2];
+  char * data_ptr = data;
+  char * output_ptr = output;
+  while(*data_ptr!=0)
   {
-    output[copy_count] = data[copy_count];
-    copy_count++;
+
+    output_ptr[0] = data_ptr[0];
+    if(*data_ptr=='D')
+    {
+      output_ptr[1] = 'D';
+      output_ptr++;
+      output_ptr[1] = 'D';
+      output_ptr++;
+    }
+    data_ptr++;
+    output_ptr++;
+
   }
 //  printf("%s:%d\n",data, strlen(data));
-  output[strlen(data)] = 0;
+  output_ptr[0] = 0;
 
   char * arrow = data;
 
@@ -351,16 +362,6 @@ void process_data_c()
   int count = 0, D_count = 0;
   while(* arrow >= 'A' && * arrow <='Z')
   {
-    /*
-    if(* arrow == 'D')
-    {
-      char * pointer = arrow;
-      pointer[1] = 'D';
-
-    }
-    */
-    
-
     count++; arrow++;
 
   }
