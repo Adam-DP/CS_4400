@@ -239,6 +239,7 @@ void process_data_b()
 
 }
 
+/*
 void adjust_output_D(char * output, char * arrow)
 {
   // bump bakc everything after D
@@ -267,7 +268,7 @@ void adjust_output_D(char * output, char * arrow)
 
 }
 
-
+*/
 
 /*
 1. any odd number of repetitions of the letter “g”;
@@ -350,12 +351,18 @@ void process_data_c()
   int count = 0, D_count = 0;
   while(* arrow >= 'A' && * arrow <='Z')
   {
+    /*
     if(* arrow == 'D')
     {
-      D_count++;
-      adjust_output_D(output, arrow);
+      char * pointer = arrow;
+      pointer[1] = 'D';
+
     }
+    */
+    
+
     count++; arrow++;
+
   }
   // make sure it's odd
   if((count & 1)&& * arrow == 0) case_yes(output);
